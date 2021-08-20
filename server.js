@@ -9,4 +9,6 @@ app.get("/api/v1/transactions", TransactionController.index);
 app.get("/api/v1/transactions/filter", TransactionController.filter);
 app.get("/api/v1/transactions/:id", TransactionController.show);
 
-app.listen(process.env.PORT || 8083);
+if (process.env.NODE_ENV !== "test") app.listen(process.env.PORT || 8083);
+
+module.exports = server = app;
