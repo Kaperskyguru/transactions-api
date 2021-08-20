@@ -7,10 +7,22 @@ class TransactionController {
         req.query.size,
         req.query.skip
       );
-      res.json(transactions);
+
+      if (transactions.length) {
+        return res.status(200).json({
+          success: true,
+          message: "Transactions retrieved successfully",
+          transactions,
+        });
+      }
+
+      return res.status(200).json({
+        success: false,
+        message: "Transactions not found",
+      });
     } catch (error) {
       console.log(error); //For Dev
-      res.json({
+      return res.status(500).json({
         message: "An error occurred",
         success: false,
       });
@@ -18,13 +30,23 @@ class TransactionController {
   }
 
   static async show(req, res) {
-    console.log(req.params.id);
     try {
       const transaction = await Transaction.find(req.params.id);
-      res.json(transaction);
+      if (transaction) {
+        return res.status(200).json({
+          success: true,
+          message: "Transaction retrieved successfully",
+          transaction,
+        });
+      }
+
+      return res.status(200).json({
+        success: false,
+        message: "Transaction not found",
+      });
     } catch (error) {
       console.log(error); //For Dev
-      res.json({
+      return res.status(500).json({
         message: "An error occurred",
         success: false,
       });
@@ -37,10 +59,21 @@ class TransactionController {
         req.query.start,
         req.query.end
       );
-      res.json(transactions);
+      if (transactions.length) {
+        return res.status(200).json({
+          success: true,
+          message: "Transactions retrieved successfully",
+          transactions,
+        });
+      }
+
+      return res.status(200).json({
+        success: false,
+        message: "Transactions not found",
+      });
     } catch (error) {
       console.log(error); //For Dev
-      res.json({
+      return res.status(500).json({
         message: "An error occurred",
         success: false,
       });
